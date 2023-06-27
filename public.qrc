@@ -1,0 +1,20 @@
+<RCC>
+  <qresource prefix="pub-assetes">
+    <file>Icons/close.png</file>
+    <file>Icons/close_black.png</file>
+    <file>Icons/dorsa.png</file>
+    <file>Icons/dorsa_black.png</file>
+    <file>Icons/dorsa_white.png</file>
+    <file>Icons/error.ico</file>
+    <file>Icons/error.png</file>
+    <file>Icons/maximize.png</file>
+    <file>Icons/maximize_black.png</file>
+    <file>Icons/message.ico</file>
+    <file>Icons/message.png</file>
+    <file>Icons/minimize.png</file>
+    <file>Icons/minimize_black.png</file>
+    <file>Icons/warning.ico</file>
+    <file>Icons/warning.png</file>
+    <file>Icons/dorsa_white.png</file>
+  </qresource>
+</RCC>
