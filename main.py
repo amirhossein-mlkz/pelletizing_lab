@@ -1,11 +1,14 @@
+import os
+os.system('cmd /c "pyrcc5 -o Assets.py Assets.qrc"')
+
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 import sys
 import webbrowser
 from functools import partial
 import texts
+import Assets
 
-##### name and directory of ui file
-main_ui_file = 'Dorsa_BaseUI/main_UI.ui'
+main_ui_file = 'main_UI.ui'
 
 class Ui(QtWidgets.QMainWindow):
     """this class is used to build class for mainwindow to load GUI application
