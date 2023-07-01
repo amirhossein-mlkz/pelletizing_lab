@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1525</width>
-    <height>1205</height>
+    <width>1505</width>
+    <height>1204</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -402,7 +402,6 @@ QListView::item{
              <font>
               <family>Arial</family>
               <pointsize>18</pointsize>
-              <weight>75</weight>
               <italic>false</italic>
               <bold>true</bold>
              </font>
@@ -864,12 +863,38 @@ max-width:150px;
                   <number>0</number>
                  </property>
                  <item>
+                  <spacer name="horizontalSpacer_36">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Maximum</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>30</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
                   <widget class="QCheckBox" name="checkBox_2">
                    <property name="layoutDirection">
                     <enum>Qt::RightToLeft</enum>
                    </property>
                    <property name="text">
-                    <string>Enable Live:</string>
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="Assets.qrc">
+                     <normaloff>:/assets/Assets/icons/icons8-video-call-50.png</normaloff>:/assets/Assets/icons/icons8-video-call-50.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>40</width>
+                     <height>40</height>
+                    </size>
                    </property>
                   </widget>
                  </item>
@@ -883,7 +908,30 @@ max-width:150px;
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>40</width>
+                     <width>15</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="Line" name="line_16">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_37">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Maximum</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>15</width>
                      <height>20</height>
                     </size>
                    </property>
@@ -895,7 +943,17 @@ max-width:150px;
                     <enum>Qt::RightToLeft</enum>
                    </property>
                    <property name="text">
-                    <string>Drawing: </string>
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="Assets.qrc">
+                     <normaloff>:/assets/Assets/icons/icons8-draw-pen-50.png</normaloff>:/assets/Assets/icons/icons8-draw-pen-50.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>35</width>
+                     <height>35</height>
+                    </size>
                    </property>
                   </widget>
                  </item>
@@ -1505,7 +1563,26 @@ color:rgb(52, 52, 52)</string>
 	
 }
 
-</string>
+
+
+QHeaderView::section {
+    background-color: #646464;
+    padding: 4px;
+    font-size: 14pt;
+    border-style: none;
+    border-bottom: 1px solid #fffff8;
+    border-right: 1px solid #fffff8;
+}
+
+QHeaderView::section:horizontal
+{
+    border-top: 1px solid #fffff8;
+}
+
+QHeaderView::section:vertical
+{
+    border-left: 1px solid #fffff8;
+}</string>
                 </property>
                 <property name="rowCount">
                  <number>3</number>
@@ -1589,7 +1666,7 @@ QComboBox, QSpinBox, QDoubleSpinBox, QLineEdit
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>0</number>
+              <number>4</number>
              </property>
              <property name="documentMode">
               <bool>false</bool>
@@ -2532,6 +2609,9 @@ max-height : 800px;
                    <property name="pixmap">
                     <pixmap resource="Assets.qrc">:/assets/Assets/images/camera-error.png</pixmap>
                    </property>
+                   <property name="scaledContents">
+                    <bool>true</bool>
+                   </property>
                   </widget>
                  </item>
                  <item>
@@ -2984,7 +3064,6 @@ margin-right:5px;</string>
                 <property name="font">
                  <font>
                   <family>Arial</family>
-                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -3112,25 +3191,6 @@ margin-right:5px;</string>
             </spacer>
            </item>
            <item>
-            <widget class="Line" name="line_13">
-             <property name="styleSheet">
-              <string notr="true">background-color: red;</string>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Sunken</enum>
-             </property>
-             <property name="lineWidth">
-              <number>5</number>
-             </property>
-             <property name="midLineWidth">
-              <number>5</number>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
             <spacer name="horizontalSpacer_2">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -3146,30 +3206,76 @@ margin-right:5px;</string>
            <item>
             <layout class="QVBoxLayout" name="calibrationpage_right_side">
              <property name="leftMargin">
-              <number>16</number>
+              <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="calibrationpage_liveimage_lbl">
-               <property name="styleSheet">
-                <string notr="true">max-width : 800px;
+              <spacer name="verticalSpacer_16">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_25">
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <spacer name="horizontalSpacer_39">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="calibrationpage_liveimage_lbl">
+                 <property name="styleSheet">
+                  <string notr="true">max-width : 800px;
 max-height : 800px;</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="pixmap">
-                <pixmap resource="Assets.qrc">:/assets/Assets/images/camera-error.png</pixmap>
-               </property>
-               <property name="scaledContents">
-                <bool>true</bool>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignJustify|Qt::AlignVCenter</set>
-               </property>
-               <property name="wordWrap">
-                <bool>false</bool>
-               </property>
-              </widget>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="pixmap">
+                  <pixmap resource="Assets.qrc">:/assets/Assets/images/camera-error.png</pixmap>
+                 </property>
+                 <property name="scaledContents">
+                  <bool>true</bool>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_38">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
              </item>
              <item>
               <spacer name="verticalSpacer_4">
@@ -3550,7 +3656,6 @@ QPushButton{
           <font>
            <family>Arial</family>
            <pointsize>9</pointsize>
-           <weight>75</weight>
            <italic>false</italic>
            <bold>true</bold>
           </font>
