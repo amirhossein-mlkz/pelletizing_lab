@@ -402,6 +402,7 @@ QListView::item{
              <font>
               <family>Arial</family>
               <pointsize>18</pointsize>
+              <weight>75</weight>
               <italic>false</italic>
               <bold>true</bold>
              </font>
@@ -1051,11 +1052,13 @@ max-height:800px;</string>
 	min-height:40px;
 	border-radius:3px;
 	color: rgb(255, 255, 255);
-	background-color: rgb(57, 57, 57);
+	background-color:rgb(22, 38, 76)
+	
 }
 
 .QPushButton:hover{
-	background-color:rgb(22, 38, 76)
+	background-color: rgb(57, 57, 57);
+	
 }
 
 </string>
@@ -3063,6 +3066,7 @@ margin-right:5px;</string>
                 <property name="font">
                  <font>
                   <family>Arial</family>
+                  <weight>50</weight>
                   <italic>false</italic>
                   <bold>false</bold>
                  </font>
@@ -3655,6 +3659,7 @@ QPushButton{
           <font>
            <family>Arial</family>
            <pointsize>9</pointsize>
+           <weight>75</weight>
            <italic>false</italic>
            <bold>true</bold>
           </font>

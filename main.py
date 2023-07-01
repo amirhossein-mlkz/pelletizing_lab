@@ -42,27 +42,63 @@ class Ui(QtWidgets.QMainWindow):
             webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path_linux))
 
         # button connector
-        self.button_connector()
+        self.header_button_connector()
+        self.sidebar_button_connector()
 
         # startup settings
         self.startup_settings()
+
+        self.pages_index = {
+            'main'       : 0,
+            'report'     : 1,
+            'settings'   : 2,
+            'calibration': 3,
+            'user'       : 4,
+            'help'       : 5
+        }
+
+    #--------------------------------- GLOBAL FUNCTION ---------------------------------
+    def button_connector(self, btn: QtWidgets.QPushButton, fun):
+        btn.clicked.connect(partial( fun ))
+
+
+    #-----------------------------------------------------------------------------------
+
 
     def startup_settings(self):
         """this function is used to do startup settings on app start
         """
         return
 
-    def button_connector(self):
+    def header_button_connector(self):
         """this function is used to connect ui buttons to their functions
         """
-        # top window buttons
-        self.minimize_btn.clicked.connect(partial(self.minimize_win))
-        self.maximize_btn.clicked.connect(partial(self.maxmize_minimize))
-        # close btn
-        self.close_btn.clicked.connect(partial(self.close_app))
+        self.button_connector( self.minimize_btn, self.minimize_win )
+        self.button_connector( self.maximize_btn, self.maxmize_minimize )
+        self.button_connector( self.close_btn, self.close_app )
         # bottom window buttens
         self.dorsa_url_btn.clicked.connect(partial(lambda: webbrowser.open("https://dorsa-co.ir/")))
         return
+    
+
+    def sidebar_button_connector(self):
+        self.button_connector( self.sidebar_main_btn, self.sidebar_menu_handler('main') )
+        self.button_connector( self.sidebar_report_btn, self.sidebar_menu_handler('report'))
+        self.button_connector( self.sidebar_settings_btn, self.sidebar_menu_handler('settings') )
+        self.button_connector( self.sidebar_calib_btn, self.sidebar_menu_handler('calibration') )
+        self.button_connector( self.sidebar_users_btn, self.sidebar_menu_handler('user') )
+        self.button_connector( self.sidebar_help_btn, self.sidebar_menu_handler('help') )
+
+        
+        
+        
+
+    def sidebar_menu_handler(self, pagename):
+        def func():
+            self.main_pages_stackw.setCurrentIndex(self.pages_index[pagename])
+        
+        return func
+    
 
     def close_app(self):
         """
@@ -86,7 +122,6 @@ class Ui(QtWidgets.QMainWindow):
         Inputs: None
         Returns: None
         """
-        
         if self.isMaximized():
             self.showNormal()
 
@@ -182,9 +217,46 @@ class Ui(QtWidgets.QMainWindow):
         self._old_pos = event.globalPos()
 
 
+    
+        
+
+
+class mainPage:
+
+    def __init__(self, ui: Ui):
+        self.ui = ui
+        
+        self.warnings_btn = {
+            'camera_connection': self.ui.mainpage_camera_connection_warning_lbl,
+            'camera_grabbing': self.ui.mainpage_camera_grabbing_warning_lbl,
+            'illumination': self.ui.mainpage_illumination_warning_lbl,
+            'tempreture': self.ui.mainpage_tempreture_warning_lbl
+            }
+        
+        self.informations = {
+
+        }
+
+    def start_btn_connector(self, func):
+        self.ui.button_connector(self.ui.mainpage_start_btn, func)
+
+    def fstart_btn_connector(self, func):
+        self.ui.button_connector(self.ui.mainpage_faststart_btn, func)
+
+
+    def stop_btn_connector(self, func):
+        self.ui.button_connector(self.ui.mainpage_stop_btn, func)
+    
+    def report_btn_connector(self, func):
+        self.ui.button_connector(self.ui.mainpage_stop_btn, func)
+    
+
+    def set_information(self,):
+        pass
         
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
+    
     window = Ui()
     window.show()
     app.exec_()
