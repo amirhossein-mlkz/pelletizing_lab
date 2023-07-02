@@ -1,12 +1,17 @@
 import os
 os.system('cmd /c "pyrcc5 -o Assets.py Assets.qrc"')
 
-from PyQt5 import QtWidgets, uic, QtCore, QtGui
+from PyQt5 import QtWidgets, uic, QtCore, QtGui, QtSvg 
 import sys
 import webbrowser
 from functools import partial
 import texts
 import Assets
+
+from PySide6.QtSvg import *
+from PyQt5.QtChart import QChart, QChartView, QBarSet,QPercentBarSeries
+
+
 
 main_ui_file = 'main_UI.ui'
 
@@ -19,9 +24,9 @@ class Ui(QtWidgets.QMainWindow):
     def __init__(self):
         """this function is used to laod ui file and build GUI application
         """
-
+        
         super(Ui, self).__init__()
-
+        
         # app language
         self.language = 'en'
 
@@ -57,11 +62,57 @@ class Ui(QtWidgets.QMainWindow):
             'help'       : 5
         }
 
-    #--------------------------------- GLOBAL FUNCTION ---------------------------------
-    def button_connector(self, btn: QtWidgets.QPushButton, fun):
-        btn.clicked.connect(partial( fun ))
+        
 
 
+
+
+
+
+    #--------------------------------- GLOBAL BUTTON FUNCTIONs ---------------------------------
+    def button_connector(self, btn: QtWidgets.QPushButton, func):
+        btn.clicked.connect(partial( func ))
+
+    def button_disable(self,  btn: QtWidgets.QPushButton ):
+        btn.setDisabled(True)
+
+    def button_enable(self,  btn: QtWidgets.QPushButton ):
+        btn.setDisabled(False)
+
+    def button_background(self, btn: QtWidgets.QPushButton, color):
+        #convert rgb to rgba
+        if len(color) == 3:
+            color+= (255,)
+
+        btn.setStyleSheet(f'background-color: rgba{color}')
+
+    def set_button_icon(self, btn: QtWidgets.QPushButton, path):
+        #load from resources
+        if path[0] == ':':
+            icon = QtGui.QIcon( path )
+        
+        #load from file
+        else:
+            pixmap = QtGui.QPixmap(path)
+            icon = QtGui.QIcon( pixmap )
+        
+        btn.setIcon(icon)
+    
+    #--------------------------------- GLOBAL CheckBoc FUNCTIONs ---------------------------------
+    def get_checkbox_value(self, chbox: QtWidgets.QCheckBox):
+        return chbox.isChecked()
+    
+    def checkbox_connector(self, chbox: QtWidgets.QCheckBox, func):
+        chbox.stateChanged.connect(partial( func ))
+
+    #--------------------------------- GLOBAL CheckBoc FUNCTIONs ---------------------------------
+    def set_label_text(self, lbl: QtWidgets.QLabel, text:str):
+        lbl.setText(text)
+
+    #--------------------------------- GLOBAL Input FUNCTIONs ---------------------------------
+    def get_input_value(self, inpt: QtWidgets.QSpinBox):
+        return inpt.value()
+        
     #-----------------------------------------------------------------------------------
 
 
@@ -222,41 +273,138 @@ class Ui(QtWidgets.QMainWindow):
 
 
 class mainPage:
-
+    
     def __init__(self, ui: Ui):
         self.ui = ui
         
-        self.warnings_btn = {
-            'camera_connection': self.ui.mainpage_camera_connection_warning_lbl,
-            'camera_grabbing': self.ui.mainpage_camera_grabbing_warning_lbl,
-            'illumination': self.ui.mainpage_illumination_warning_lbl,
-            'tempreture': self.ui.mainpage_tempreture_warning_lbl
+        self.warning_btns = {
+            'camera_connection': {
+                'btn':self.ui.mainpage_camera_connection_warning_btn,
+                'ok-icon':':/assets/Assets/icons/icons8-connection-green-50.png',
+                'warning-icon':':/assets/Assets/icons/icons8-connection-red-50.png'
+                },
+            'camera_grabbing': {
+                'btn': self.ui.mainpage_camera_grabbing_warning_btn,
+                'ok-icon':':/assets/Assets/icons/icons8-camera-green-50.png',
+                'warning-icon':':/assets/Assets/icons/icons8-camera-red-50.png'
+                },
+
+            'illumination': {
+                'btn': self.ui.mainpage_illumination_warning_btn,
+                'ok-icon':':/assets/Assets/icons/icons8-headlight-green-50.png',
+                'warning-icon':':/assets/Assets/icons/icons8-headlight-red-50.png'
+            },
+                             
+            'tempreture': {
+                'btn': self.ui.mainpage_tempreture_warning_btn,
+                'ok-icon':':/assets/Assets/icons/icons8-thermometer-green-50.png',
+                'warning-icon':':/assets/Assets/icons/icons8-thermometer-red-50.png'
             }
+        }
         
         self.informations = {
+            'ovality': self.ui.mainpage_mean_oval_lbl,
+            'avrage': self.ui.mainpage_avrage_lbl,
+            'std': self.ui.mainpage_std_lbl,
+            'fps': self.ui.mainpage_fps_lbl
 
         }
 
-    def start_btn_connector(self, func):
-        self.ui.button_connector(self.ui.mainpage_start_btn, func)
+        self.player_btns = {
+            'start': self.ui.mainpage_start_btn,
+            'stop' : self.ui.mainpage_stop_btn,
+            'fast_start': self.ui.mainpage_faststart_btn
+        }
 
-    def fstart_btn_connector(self, func):
-        self.ui.button_connector(self.ui.mainpage_faststart_btn, func)
+        self.current_status = 'stop'
 
 
-    def stop_btn_connector(self, func):
-        self.ui.button_connector(self.ui.mainpage_stop_btn, func)
+        #Startup operations-----------------
+        self.player_buttons_connect_internal()
+
+
+
+
+    def player_buttons_status(self,state):
+        def func():
+            if state in ['start', 'fast_start']:
+                self.ui.button_disable(self.player_btns['start'])
+                self.ui.button_disable(self.player_btns['fast_start'])
+                self.ui.button_enable(self.player_btns['stop'])
+                self.current_status = 'start'
+            
+            else:
+                self.ui.button_enable(self.player_btns['start'])
+                self.ui.button_enable(self.player_btns['fast_start'])
+                self.ui.button_disable(self.player_btns['stop'])
+                self.current_status = 'stop'
+        return func
+        
+
+    def player_buttons_connect(self,name:str,  func):
+        self.ui.button_connector( self.player_btns[ name ], func)
+
+    
+    def player_buttons_connect_internal(self):
+        for state, btn in self.player_btns.items():
+            self.ui.button_connector(btn, self.player_buttons_status(state) )
+
+    def set_warning_buttons_status(self, name, status):
+        if status:
+            self.ui.set_button_icon(self.warning_btns[name]['btn'],
+                                     self.warning_btns[name]['ok-icon'])
+        else:
+            self.ui.set_button_icon(self.warning_btns[name]['btn'],
+                                     self.warning_btns[name]['warning-icon'])
+            
+
     
     def report_btn_connector(self, func):
         self.ui.button_connector(self.ui.mainpage_stop_btn, func)
-    
 
-    def set_information(self,):
-        pass
+    def toolbox_connector(self, func):
+        self.ui.checkbox_connector(self.ui.mainpage_liveview_checkbox, func('live-view'))
+        self.ui.checkbox_connector(self.ui.mainpage_drawing_checkbox, func('drawing'))
+    
+    {'ovality': 0.7}
+
+    def set_information(self, data):
+        for name, value in data.items():
+            self.ui.set_label_text( self.informations[name],
+                                    str(value) 
+                                    )
+        
+
+
+
+class pelletizingSetting:
+
+    def __init__(self, ui) -> None:
+        self.ui = ui
+
+        self.ranges_input = {
+            'lower': self.ui.settingpage_grading_low_limit_spinbox,
+            'upper': self.ui.settingpage_grading_up_limit_spinbox
+        }
+
+    
+    def add_range_button_connector(self, func):
+        data = {}
+        for key in self.ranges_input.keys():
+            data[key] = self.ui.get_input_value( 
+                self.ranges_input[key]
+             )
+        
+        self.ui.button_connector( self.ui.settingpage_grading_add_range_btn, func(data) )
+        
+        
+        
+        
         
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    
     window = Ui()
+    main_page = mainPage(window)
+    main_page.set_warning_buttons_status('illumination', False)
     window.show()
     app.exec_()

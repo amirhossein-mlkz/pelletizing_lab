@@ -876,7 +876,7 @@ max-width:150px;
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QCheckBox" name="checkBox_2">
+                  <widget class="QCheckBox" name="mainpage_liveview_checkbox">
                    <property name="layoutDirection">
                     <enum>Qt::RightToLeft</enum>
                    </property>
@@ -938,7 +938,7 @@ max-width:150px;
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QCheckBox" name="checkBox_3">
+                  <widget class="QCheckBox" name="mainpage_drawing_checkbox">
                    <property name="layoutDirection">
                     <enum>Qt::RightToLeft</enum>
                    </property>
@@ -1057,15 +1057,20 @@ max-height:800px;</string>
 }
 
 .QPushButton:hover{
-	background-color: rgb(57, 57, 57);
+	background-color: rgb(4, 3, 29)
 	
 }
-
+.QPushButton:disabled {
+background-color:rgb(147, 147, 147);
+}
 </string>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_5">
                     <item>
                      <widget class="QPushButton" name="mainpage_start_btn">
+                      <property name="enabled">
+                       <bool>true</bool>
+                      </property>
                       <property name="styleSheet">
                        <string notr="true"/>
                       </property>
@@ -1094,6 +1099,9 @@ max-height:800px;</string>
                     </item>
                     <item>
                      <widget class="QPushButton" name="mainpage_stop_btn">
+                      <property name="enabled">
+                       <bool>false</bool>
+                      </property>
                       <property name="styleSheet">
                        <string notr="true"/>
                       </property>
@@ -1139,14 +1147,14 @@ QLabel{
                      <number>0</number>
                     </property>
                     <item row="0" column="1">
-                     <widget class="QLabel" name="label_36">
+                     <widget class="QLabel" name="mainpage_mean_oval_lbl">
                       <property name="text">
                        <string>78%</string>
                       </property>
                      </widget>
                     </item>
                     <item row="1" column="4">
-                     <widget class="QLabel" name="label_35">
+                     <widget class="QLabel" name="mainpage_std_lbl">
                       <property name="text">
                        <string>1.6mm</string>
                       </property>
@@ -1172,7 +1180,7 @@ QLabel{
 font-weight: bold;</string>
                       </property>
                       <property name="text">
-                       <string>FPS: </string>
+                       <string>FPS:</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1198,7 +1206,7 @@ font-weight: bold;
 </string>
                       </property>
                       <property name="text">
-                       <string>Oval:</string>
+                       <string>Mean Oval:</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1206,7 +1214,7 @@ font-weight: bold;
                      </widget>
                     </item>
                     <item row="3" column="1">
-                     <widget class="QLabel" name="label_37">
+                     <widget class="QLabel" name="mainpage_fps_lbl">
                       <property name="text">
                        <string>11</string>
                       </property>
@@ -1240,7 +1248,7 @@ font-weight: bold;</string>
                      </widget>
                     </item>
                     <item row="1" column="1">
-                     <widget class="QLabel" name="label_34">
+                     <widget class="QLabel" name="mainpage_avrage_lbl">
                       <property name="text">
                        <string>12.8 mm</string>
                       </property>
@@ -1409,7 +1417,7 @@ QPushButton
                      </widget>
                     </item>
                     <item row="0" column="0">
-                     <widget class="QPushButton" name="pushButton">
+                     <widget class="QPushButton" name="mainpage_tempreture_warning_btn">
                       <property name="minimumSize">
                        <size>
                         <width>134</width>
@@ -1427,18 +1435,18 @@ QPushButton
                       </property>
                       <property name="icon">
                        <iconset resource="Assets.qrc">
-                        <normaloff>:/assets/Assets/icons/icons8-thermometer-50-_1_.svg</normaloff>:/assets/Assets/icons/icons8-thermometer-50-_1_.svg</iconset>
+                        <normaloff>:/assets/Assets/icons/icons8-thermometer-green-50.png</normaloff>:/assets/Assets/icons/icons8-thermometer-green-50.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
-                        <width>50</width>
-                        <height>50</height>
+                        <width>40</width>
+                        <height>40</height>
                        </size>
                       </property>
                      </widget>
                     </item>
                     <item row="0" column="1">
-                     <widget class="QPushButton" name="pushButton_2">
+                     <widget class="QPushButton" name="mainpage_illumination_warning_btn">
                       <property name="cursor">
                        <cursorShape>PointingHandCursor</cursorShape>
                       </property>
@@ -1447,18 +1455,18 @@ QPushButton
                       </property>
                       <property name="icon">
                        <iconset resource="Assets.qrc">
-                        <normaloff>:/assets/Assets/icons/icons8-headlight-50.svg</normaloff>:/assets/Assets/icons/icons8-headlight-50.svg</iconset>
+                        <normaloff>:/assets/Assets/icons/icons8-headlight-green-50.png</normaloff>:/assets/Assets/icons/icons8-headlight-green-50.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
-                        <width>50</width>
-                        <height>50</height>
+                        <width>40</width>
+                        <height>40</height>
                        </size>
                       </property>
                      </widget>
                     </item>
                     <item row="0" column="2">
-                     <widget class="QPushButton" name="pushButton_3">
+                     <widget class="QPushButton" name="mainpage_camera_connection_warning_btn">
                       <property name="cursor">
                        <cursorShape>PointingHandCursor</cursorShape>
                       </property>
@@ -1467,32 +1475,35 @@ QPushButton
                       </property>
                       <property name="icon">
                        <iconset resource="Assets.qrc">
-                        <normaloff>:/assets/Assets/icons/icons8-connection-50.svg</normaloff>:/assets/Assets/icons/icons8-connection-50.svg</iconset>
+                        <normaloff>:/assets/Assets/icons/icons8-connection-green-50.png</normaloff>:/assets/Assets/icons/icons8-connection-green-50.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
-                        <width>50</width>
-                        <height>50</height>
+                        <width>40</width>
+                        <height>40</height>
                        </size>
                       </property>
                      </widget>
                     </item>
                     <item row="0" column="3">
-                     <widget class="QPushButton" name="pushButton_4">
+                     <widget class="QPushButton" name="mainpage_camera_grabbing_warning_btn">
                       <property name="cursor">
                        <cursorShape>PointingHandCursor</cursorShape>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true"/>
                       </property>
                       <property name="text">
                        <string/>
                       </property>
                       <property name="icon">
                        <iconset resource="Assets.qrc">
-                        <normaloff>:/assets/Assets/icons/icons8-camera-50.svg</normaloff>:/assets/Assets/icons/icons8-camera-50.svg</iconset>
+                        <normaloff>:/assets/Assets/icons/icons8-camera-green-50.png</normaloff>:/assets/Assets/icons/icons8-camera-green-50.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
-                        <width>50</width>
-                        <height>50</height>
+                        <width>40</width>
+                        <height>40</height>
                        </size>
                       </property>
                      </widget>
@@ -1619,7 +1630,7 @@ QHeaderView::section:vertical
 QGroupBox
 {
 	font-size: 18px;	
-	border: 1px solid rgb(6, 76, 130, 120);
+	border: 1px solid rgba(6, 76, 130, 120);
 	border-radius: 5px;
 	margin-bottom: 30px;
 	padding-top: 30px;
@@ -1668,7 +1679,7 @@ QComboBox, QSpinBox, QDoubleSpinBox, QLineEdit
               <enum>QTabWidget::Rounded</enum>
              </property>
              <property name="currentIndex">
-              <number>4</number>
+              <number>2</number>
              </property>
              <property name="documentMode">
               <bool>false</bool>
@@ -1938,9 +1949,9 @@ QComboBox, QSpinBox, QDoubleSpinBox, QLineEdit
                <string>Page</string>
               </attribute>
              </widget>
-             <widget class="QWidget" name="settingpage_pelletizing_tab">
+             <widget class="QWidget" name="settingpage_grading_tab">
               <attribute name="title">
-               <string>Pelletizing</string>
+               <string>Grading</string>
               </attribute>
               <layout class="QHBoxLayout" name="horizontalLayout_22">
                <item>
@@ -1959,7 +1970,7 @@ QComboBox, QSpinBox, QDoubleSpinBox, QLineEdit
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLineEdit" name="settingpage_pelletizing_name_inpt"/>
+                     <widget class="QLineEdit" name="settingpage_grading_name_inpt"/>
                     </item>
                     <item>
                      <spacer name="horizontalSpacer_22">
@@ -1995,7 +2006,7 @@ QComboBox, QSpinBox, QDoubleSpinBox, QLineEdit
                   <item>
                    <layout class="QGridLayout" name="gridLayout_13">
                     <item row="0" column="4">
-                     <widget class="QDoubleSpinBox" name="settingpage_pelletizing_up_limit_spinbox">
+                     <widget class="QDoubleSpinBox" name="settingpage_grading_up_limit_spinbox">
                       <property name="styleSheet">
                        <string notr="true">max-width:100px;
 min-width: 50px;</string>
@@ -2006,7 +2017,7 @@ min-width: 50px;</string>
                      </widget>
                     </item>
                     <item row="0" column="1">
-                     <widget class="QDoubleSpinBox" name="settingpage_pelletizing_low_limit_spinbox">
+                     <widget class="QDoubleSpinBox" name="settingpage_grading_low_limit_spinbox">
                       <property name="styleSheet">
                        <string notr="true">max-width:100px;
 min-width: 50px;</string>
@@ -2069,7 +2080,7 @@ min-width: 50px;</string>
                      </widget>
                     </item>
                     <item row="0" column="6">
-                     <widget class="QPushButton" name="settingpage_pelletizing_add_range_btn">
+                     <widget class="QPushButton" name="settingpage_grading_add_range_btn">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
@@ -2078,7 +2089,7 @@ min-width: 50px;</string>
                       </property>
                       <property name="styleSheet">
                        <string notr="true">#settingpage_pelletizing_add_range_btn{
-background-color:rgb(34, 132, 50,0);
+background-color:rgba(34, 132, 50,0);
 color: white;
 max-width: 50px;
 min-width: 0px;
@@ -2086,8 +2097,8 @@ min-width: 0px;
 }
 
 #settingpage_pelletizing_add_range_btn:hover{
-background-color: rgb(110, 188, 54,20);
-border: 2px solid rgb(110, 188, 54,20);
+background-color: rgba(110, 188, 54,20);
+border: 2px solid rgba(110, 188, 54,20);
 border-radius: 200px;
 
 }</string>
@@ -2139,7 +2150,7 @@ font-weight:bold;</string>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QTableWidget" name="settingpage_pelletizing_ranges_tabel"/>
+                   <widget class="QTableWidget" name="settingpage_grading_ranges_tabel"/>
                   </item>
                   <item>
                    <widget class="QFrame" name="horizontalFrame_3">
@@ -2238,7 +2249,7 @@ font-weight:bold;</string>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_17">
                   <item>
-                   <widget class="QTableWidget" name="settingpage_pelletizing_standards_tabel"/>
+                   <widget class="QTableWidget" name="settingpage_grading_standards_tabel"/>
                   </item>
                  </layout>
                 </widget>
@@ -3730,6 +3741,7 @@ QPushButton{
  </widget>
  <resources>
   <include location="Assets.qrc"/>
+  <include location="../../.designer/backup/Assets.qrc"/>
  </resources>
  <connections/>
 </ui>
